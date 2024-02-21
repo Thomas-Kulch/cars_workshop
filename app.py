@@ -12,7 +12,6 @@ st.write('Browse our inventory of used car. \n\n Narrow your selection by filter
 #Selection box for manufacturers
 selection = st.selectbox('Select a Manufacturer', v.unique_manufacturer)
 
-
 #Slider range
 year_range = st.slider('Year Filter',value=(v.min_year,v.max_year),min_value=v.min_year,max_value=v.max_year)
 actual_range = list(range(year_range[0],year_range[1]+1))
@@ -43,6 +42,7 @@ st.dataframe(car_filtered.set_index(car_filtered.columns[0]).style.format({'Odom
                                                                            'Price (USD)':'{:,.2f}'}))
 
 
+
 #New section of the page: Price Analysis
 st.header('Price Analysis')
 st.write("""
@@ -68,7 +68,7 @@ st.write("""
 list_for_scatter = ['odometer_value','engine_capacity','number_of_photos']
 scatter_select = st.selectbox('Price dependency on:',list_for_scatter)
 
-
+#create scatter plot
 fig2 = px.scatter(v.car_ads,x='price_usd',y=scatter_select,color=v.car_ads['age_category'])
 
 st.plotly_chart(fig2)
